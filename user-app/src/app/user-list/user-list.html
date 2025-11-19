@@ -1,0 +1,28 @@
+<h1>User list simple</h1>
+@if(isUserLoading){
+    <div class="loading">Loading...</div>
+}
+@if(isUserLoadingFailed){
+    <div>Error loading data</div>
+}
+@if(!isUserLoading && !isUserLoadingFailed){
+    <div class="user-list">
+        @for( user of users; track user.id){
+            <div [class]="{ 'user-list__row--selected': user.id == selectedUserId}" (click)="onSelectUser(user.id)" class="user-list__row">
+                <div class="user-list__cell">{{ user.name }}</div>
+                <div class="user-list__cell">{{ user.email}}</div>
+            </div>
+        }
+    </div>
+}
+
+<button (click)="onReload()">Reload</button>
+
+
+<ol>
+    @for(todo of todos; track todo.id){
+        <li>
+            {{ todo.title}} ({{ todo.completed ? '+' : '*'}})
+        </li>
+    }
+</ol>
